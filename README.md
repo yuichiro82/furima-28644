@@ -51,6 +51,8 @@
 | building_name  | string     | default: ""                                 |
 | phone_number   | string     | default: "", null: false                    |
 | user           | references |              null: false, foreign_key: true |
+| item           | references |              null: false, foreign_key: true |
+
 
 ### Association
 
