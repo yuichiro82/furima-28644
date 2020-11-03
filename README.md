@@ -16,29 +16,28 @@
 ### Association
 
 - has_many :items
-- has_one :buy
-- has_one :address
+- has_many :buys
  
 
 ## items テーブル
 
-| Column          | Type       | Options                        |
-| --------------- | ---------- | -------------------------------|
-| name            | string     | null: false                    |
-| text            | text       | null: false                    |
-| category        | integer    | null: false                    |
-| item_status     | integer    | null: false                    |
-| burden_amount   | integer    | null: false                    |
-| shipment_source | integer    | null: false                    |
-| days_to_ship    | integer    | null: false                    |
-| price           | string     | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| Column                | Type       | Options                        |
+| ----------------------| ---------- | -------------------------------|
+| name                  | string     | null: false                    |
+| text                  | text       | null: false                    |
+| category_id           | integer    | null: false                    |
+| item_status_id        | integer    | null: false                    |
+| burden_amount_id      | integer    | null: false                    |
+| shipment_source_id    | integer    | null: false                    |
+| delivery_schedule_id  | integer    | null: false                    |
+| price                 | string     | null: false                    |
+| user                  | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :address
 - has_one    :buy
+
 
 ## address テーブル
 
@@ -56,8 +55,6 @@
 
 ### Association
 
-- belongs_to :item
-- belongs_to :user
 - has_one    :buy
 
 ## buys テーブル
