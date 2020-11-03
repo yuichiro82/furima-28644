@@ -49,13 +49,10 @@
 | house_number   | string     | default: "", null: false                    |
 | building_name  | string     | default: ""                                 |
 | phone_number   | string     | default: "", null: false                    |
-| user           | references |              null: false, foreign_key: true |
-| item           | references |              null: false, foreign_key: true |
-
 
 ### Association
 
-- has_one    :buy
+- belongs_to  :buy
 
 ## buys テーブル
 
@@ -69,4 +66,4 @@
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :address
+- has_one :address
