@@ -9,17 +9,29 @@ RSpec.describe User, type: :model do
     it '全ての値が入力されていれば保存できる事' do
       expect(@user).to be_valid
     end
-    
+
+    it 'passwordが6文字以上であれば登録できること' do
+      @user.password = 'a123456'
+      @user.password_confirmation = 'a123456'
+      expect(@user).to be_valid
+    end
+
     it 'nicknameが空だと保存できない' do
       @user.nickname = nil
       @user.valid?
       expect(@user.errors.full_messages).to include("Nickname can't be blank")
     end
-    
+
     it 'emailが空だと保存できない' do
       @user.email = nil
       @user.valid?
       expect(@user.errors.full_messages).to include("Email can't be blank")
+    end
+
+    it 'emailが＠を含んでいないと保存できない' do
+      @user.email = 'test.test'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Email is invalid')
     end
 
     it 'passwordが空だと保存できない' do
@@ -28,24 +40,25 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Password can't be blank")
     end
 
-    it 'password:半角英数混合(半角英語のみ)' do
+    it 'password:半角英数混合(半角英語のみ)でないと登録できない' do
       @user.password = 'aaaaaaa'
       @user.password_confirmation = 'aaaaaaa'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is invalid")
+      expect(@user.errors.full_messages).to include('Password is invalid')
     end
 
-    it "passwordが6文字以上であれば登録できること" do
-      @user.password = "a123456"
-      @user.password_confirmation = "a123456"
-      expect(@user).to be_valid
-    end
-
-    it "passwordが5文字以下であれば登録できないこと" do
-      @user.password = "a2345"
-      @user.password_confirmation = "a2345"
+    it 'password:半角英数混合(半角英語のみ)でないと登録できない' do
+      @user.password = '123456'
+      @user.password_confirmation = '123456'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
+      expect(@user.errors.full_messages).to include('Password is invalid')
+    end
+
+    it 'passwordが5文字以下であれば登録できないこと' do
+      @user.password = 'a2345'
+      @user.password_confirmation = 'a2345'
+      @user.valid?
+      expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
     end
 
     it 'password_confirmationが空だと保存できない' do
@@ -53,38 +66,38 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
     end
-    
-    it "passwordとpassword_confirmationが不一致では登録できないこと" do
-      @user.password = "123456"
-      @user.password_confirmation = "1234567"
+
+    it 'passwordとpassword_confirmationが不一致では登録できないこと' do
+      @user.password = '123456'
+      @user.password_confirmation = '1234567'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    
+
     it 'family_nameが空だと保存できない' do
       @user.family_name = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name can't be blank")
+      expect(@user.errors.full_messages).to include("Family name can't be blank", 'Family name is invalid')
     end
-    
+
     it 'first_nameが空だと保存できない' do
       @user.first_name = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name can't be blank")
+      expect(@user.errors.full_messages).to include("First name can't be blank", 'First name is invalid')
     end
-    
+
     it 'family_name_kanaが空だと保存できない' do
       @user.family_name_kana = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name kana can't be blank")
+      expect(@user.errors.full_messages).to include("Family name kana can't be blank", 'Family name kana is invalid')
     end
-    
+
     it 'first_name_kanaが空だと保存できない' do
       @user.first_name_kana = nil
       @user.valid?
-      expect(@user.errors.full_messages).to include("First name kana can't be blank")
+      expect(@user.errors.full_messages).to include("First name kana can't be blank", 'First name kana is invalid')
     end
-    
+
     it 'birthdayが空だと保存できない' do
       @user.birthday = nil
       @user.valid?
