@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
       @user.save
       another_user = FactoryBot.build(:user, email: @user.email)
       another_user.valid?
-      expect(another_user.errors.full_messages).to include("Email has already been taken")
+      expect(another_user.errors.full_messages).to include('Email has already been taken')
     end
 
     it 'passwordが空だと保存できない' do
@@ -90,7 +90,7 @@ RSpec.describe User, type: :model do
     it 'family_nameが漢字・平仮名・カタカナ以外保存できない' do
       @user.family_name = '123'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name is invalid")
+      expect(@user.errors.full_messages).to include('Family name is invalid')
     end
 
     it 'first_nameが空だと保存できない' do
@@ -114,7 +114,7 @@ RSpec.describe User, type: :model do
     it 'family_name_kanaが漢字・平仮名・カタカナ以外保存できない' do
       @user.family_name_kana = '123'
       @user.valid?
-      expect(@user.errors.full_messages).to include("Family name kana is invalid")
+      expect(@user.errors.full_messages).to include('Family name kana is invalid')
     end
 
     it 'first_name_kanaが空だと保存できない' do
