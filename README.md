@@ -1,3 +1,5 @@
+# README
+
 # テーブル設計
 
 ## users テーブル
@@ -16,7 +18,7 @@
 ### Association
 
 - has_many :items
-- has_many :buys
+- has_many :orders
  
 
 ## items テーブル
@@ -36,7 +38,7 @@
 ### Association
 
 - belongs_to :user
-- has_one    :buy
+- has_one    :order
 
 
 ## address テーブル
@@ -52,9 +54,9 @@
 
 ### Association
 
-- belongs_to  :buy
+- belongs_to  :order
 
-## buys テーブル
+## orders テーブル
 
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
@@ -67,3 +69,4 @@
 - belongs_to :item
 - belongs_to :user
 - has_one :address
+
