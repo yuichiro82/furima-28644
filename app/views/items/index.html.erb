@@ -127,10 +127,11 @@
     <ul class='item-lists'>
 
       <li class='list'>
-      <% @item.each_with_index do |item,i| %>
-        <%= link_to "/items/#{i}" do %>
+      <% @item.each do |item| %>
+        <%= link_to "/items/#{item.id}" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class:"item-img" if item.image.attached? %>
+           <%= link_to '詳細', item_path(item.id) %>
           <%# メモ：商品が売れていればsold outを表示 %>
           <% if @order.present? %>
             <div class='sold-out'>
