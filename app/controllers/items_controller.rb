@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item.update(item_params) 
+    @item.update(item_params)
     if @item.valid?
       @item.save
       redirect_to root_path
@@ -41,7 +41,7 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
-    
+
   def item_params
     params.require(:item).permit(:image, :name, :text, :category_id, :item_status_id, :burden_amount_id, :shipment_source_id, :delivery_schedule_id, :price).merge(user_id: current_user.id)
   end
