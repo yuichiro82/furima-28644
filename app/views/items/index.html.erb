@@ -127,8 +127,8 @@
     <ul class='item-lists'>
 
       <li class='list'>
-      <% @item.each_with_index do |item,i| %>
-        <%= link_to "/items/#{i}" do %>
+      <% @item.each do |item| %>
+        <%= link_to "/items/#{item.id}" do %>
         <div class='item-img-content'>
           <%= image_tag item.image, class:"item-img" if item.image.attached? %>
           <%# メモ：商品が売れていればsold outを表示 %>
