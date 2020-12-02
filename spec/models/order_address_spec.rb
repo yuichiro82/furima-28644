@@ -51,7 +51,7 @@ RSpec.describe OrderAddress, type: :model do
   end
 
   it 'phone_numberが10文字以下では保存できない' do
-    @order_address.phone_number = 123456789
+    @order_address.phone_number = 123_456_789
     @order_address.valid?
     expect(@order_address.errors.full_messages).to include('Phone number is invalid')
   end
@@ -67,5 +67,4 @@ RSpec.describe OrderAddress, type: :model do
     @order_address.valid?
     expect(@order_address.errors.full_messages).to include("Token can't be blank")
   end
-
 end
