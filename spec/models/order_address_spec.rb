@@ -10,7 +10,7 @@ RSpec.describe OrderAddress, type: :model do
   end
 
   it 'building_nameがなくても保存できる事' do
-    @order_address.building_name = ''
+    @order_address.building_name = ""
     expect(@order_address).to be_valid
   end
 
@@ -56,10 +56,22 @@ RSpec.describe OrderAddress, type: :model do
     expect(@order_address.errors.full_messages).to include('Phone number is invalid')
   end
 
+  it 'phone_numberが12文字以上では保存できない' do
+    @order_address.phone_number = 123_456_789123
+    @order_address.valid?
+    expect(@order_address.errors.full_messages).to include('Phone number is invalid')
+  end
+
   it 'user_idが空では保存できない' do
     @order_address.user_id = nil
     @order_address.valid?
     expect(@order_address.errors.full_messages).to include("User can't be blank")
+  end
+
+  it 'item_idが空では保存できない' do
+    @order_address.item_id = nil
+    @order_address.valid?
+    expect(@order_address.errors.full_messages).to include("Item can't be blank")
   end
 
   it 'tokenが空では保存できない' do
